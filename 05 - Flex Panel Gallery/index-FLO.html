@@ -121,7 +121,9 @@
   <script>
     function panelClick(){this.classList.toggle("open")};
     function panelOpened(e){
-      if(e.propertyName === "flex-grow"){
+      /* Safari transitionend event.propertyName === flex */
+      /* Chrome + FF transitionend event.propertyName === flex-grow */
+      if(e.propertyName.includes("flex")){
         this.firstElementChild.classList.toggle("opened")
         this.lastElementChild.classList.toggle("opened")
       }
