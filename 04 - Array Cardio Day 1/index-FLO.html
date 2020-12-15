@@ -35,31 +35,53 @@
       'Billings, Josh', 'Birrell, Augustine', 'Blair, Tony', 'Beecher, Henry', 'Biondo, Frank'
     ];
 
+    const lived = (inventor) => {return inventor.passed - inventor.year;}
+    const fullname = (inventor) => {return `${inventor.first} ${inventor.last}`;}
+    const latsPeopleName = (people) => {return people.substring(0,people.indexOf(","))}
+
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+    const first = inventors.filter(inventor => inventor.year > 1500 && inventor.year < 1600)
+    console.log(first)
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
+    const second = inventors.map(inventor => fullname(inventor))
+    console.log(second)
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+    const third = [...inventors].sort((inventor_1, inventor_2)  => inventor_1.year - inventor_2.year);
+    console.log(third)
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
+    const fourth = inventors.reduce((accumulator, inventor) => lived(inventor) + accumulator, 0);
+    console.log(fourth);
 
     // 5. Sort the inventors by years lived
+    const fifth = [...inventors].sort((inventor_1, inventor_2)  => lived(inventor_1) - lived(inventor_2));
+    console.log(fifth)
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
-    // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
-
+    // const url = "https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris"
+    const sixth = inventors.map((inventor) => `Boulevard de ${fullname(inventor)}`)
+    console.log(sixth)
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+    const seventh = people.sort((people_1, people_2)  => latsPeopleName(people_1) - latsPeopleName(people_2));
+    console.log(seventh)
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
-
+    const eigth = new Map();
+    data.forEach((datum) => {
+      eigth[datum] = 1 + eigth[datum]||0;  // Crée des symbols
+      // eigth.set(datum, 1 + eigth.get(datum)||0); // Crée des strings
+    });
+    console.log(eigth);
   </script>
 </body>
 </html>
